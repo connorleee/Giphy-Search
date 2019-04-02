@@ -3,14 +3,35 @@
 
 <head>
     <title>Giphy Search</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="assets/css/"> -->
 
 </head>
 
 <body>
+    <div class="jumbotron text-center">
+        <p class="lead">Add an animal</p>
+        <div class="input-group mb-1">
+            <input type="text" class="form-control" placeholder="Animal" aria-label="Recipient's username" id="user-animal">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" id="newItem">Submit</button>
+            </div>
+        </div>
+    </div>
 
-    
+    <!-- Display the usable buttons here -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" id="requestButtons"></div>
+        </div>
+    </div>
+
+    <!-- Display the gifs here -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" id="gifDisplay"></div>
+        </div>
+    </div>
 
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -22,6 +43,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
+    <script src="assets/javascript/app.js"></script>
 </body>
 
 </html>
