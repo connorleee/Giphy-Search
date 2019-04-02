@@ -50,17 +50,26 @@ function displayGifs() {
         for (let i = 0; i < response.data.length; i++) {
             // Will need to add logic to add more responses if rating isn't g or pg
             // only return pg and g rated
-            
-            if(response.data[i].rating === "g" || response.data[i].rating === "pg"){
-                var gifDiv = $("<div class=gif");
+
+            if (response.data[i].rating === "g" || response.data[i].rating === "pg") {
                 var stillGifUrl = response.data[i].images.original_still.url;
                 var animatedGifUrl = response.data[i].images.downsized_large.url;
                 var rating = response.data[i].rating;
 
-                pRating = $("<p>").text("Rating: " + rating);
-                console.log(rating);
-                console.log(stillGifUrl);
-                
+                // var gifDiv = $("<div style='display: block; position: relative'>");
+                // var pRating = $("<p style='display: inline; position: absolute; top: -18px'>").text("Rating: " + rating);
+                var gifDiv = $("<div style='display: inline'>");
+                var pRating = $("<p style='display: inline'>").text("Rating: " + rating);
+                var imgTag = $("<img class='gif' src=" + stillGifUrl + ">")
+
+                var gifCluster = gifDiv.append(pRating).append(imgTag)
+
+                // write the whole div to the HTML
+                $("#gifDisplay").prepend(gifCluster)
+
+                // TODO: prevent entire history of click events from displaying for each successive click.
+                // gifDiv.empty()
+
             }
         }
     })
@@ -70,6 +79,7 @@ function displayGifs() {
 $(document).on("click", ".animalButton", displayGifs);
 
 // TODO: click handler on created gifs that will run the gif when clicked
+
 
 // Create initial buttons
 buttonCreator();
