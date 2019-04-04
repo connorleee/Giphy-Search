@@ -4,6 +4,7 @@
 
 // initial array of buttons
 var animalList = ["turkey", "dolphin", "tortoise", "dalmation", "goose"];
+var jsonData;
 
 // Create buttons from animalList
 function buttonCreator() {
@@ -47,6 +48,8 @@ function displayGifs() {
     }).then(function (response) {
         console.log("JSON" + response);
 
+        jsonData = response.data;
+
         for (let i = 0; i < response.data.length; i++) {
             // Will need to add logic to add more responses if rating isn't g or pg
             // only return pg and g rated
@@ -58,22 +61,53 @@ function displayGifs() {
 
                 // var gifDiv = $("<div style='display: block; position: relative'>");
                 // var pRating = $("<p style='display: inline; position: absolute; top: -18px'>").text("Rating: " + rating);
-                var gifDiv = $("<div style='display: inline'>");
-                var pRating = $("<p style='display: inline'>").text("Rating: " + rating);
-                var imgTag = $("<img class='gif' src=" + stillGifUrl + ">")
+                var gifDiv = $("<div>").attr("style", "display: inline-block; position: relative").addClass("gif-div, m-4");
+                var pRating = $("<p>").attr("style", "position: absolute; top: -1.5rem").text("Rating: " + rating);
+                var imgTag = $("<img>").addClass("gif").attr("src", stillGifUrl).attr("data-still", stillGifUrl).attr("data-animated", animatedGifUrl).attr("state", "still");
 
-                var gifCluster = gifDiv.append(pRating).append(imgTag)
+                // conditional to set 
+                // if(imgTag.attr("state") === "still"){
+                //     imgTag = $("<img>").addClass("gif").attr("src", stillGifUrl);
+                // } else if (imgTag.attr("state") === "animated"){
+                //     imgTag = $("<img>").addClass("gif").attr("src", animatedGifUrl);
+                // };
+
+
+                // gif cluster ties together the whole div
+                var gifCluster = gifDiv
+                    .append(pRating)
+                    .append(imgTag)
 
                 // write the whole div to the HTML
                 $("#gifDisplay").prepend(gifCluster)
 
-                // TODO: prevent entire history of click events from displaying for each successive click.
-                // gifDiv.empty()
-
+                // TODO: randomize the gifs that are returned
             }
         }
     })
 }
+
+$(document).on("click", ".gif", function () {
+    console.log(this)
+
+    var gifState = $(this).attr("state");
+    var gifUrl = $(this).attr("src");
+    var gifStill = $(this).attr("data-still")
+    var gifAnimated = $(this).attr("data-animated")
+
+    console.log(gifUrl)
+    console.log(gifStill)
+    console.log(gifAnimated)
+
+    if (gifState === "still") {
+        $(this).attr("state", "animated")
+        $(this).attr("src", gifAnimated);
+    } else {
+        $(this).attr("state", "still")
+        $(this).attr("src", gifStill);
+
+    }
+})
 
 // Adding a click event listener to all elements with a class of "movie-btn"
 $(document).on("click", ".animalButton", displayGifs);
